@@ -13,4 +13,8 @@ export class UserController {
   findAll(): User[] {
     return this.appService.findAll();
   }
+  @Get(':id')
+  findOne(id: string, fields?: string[]){
+    return this.appService.findOne();
+  }
 }

@@ -8,6 +8,6 @@ export class UserService {
   }
   findAll(): User[] {
     const data = fs.readFileSync('data/users.json', 'utf-8');
-    return JSON.parse(data);
+    return JSON.parse(data) as User[];
   }
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "firstName": "สมชาย",
+    "lastName": "ใจดี",
+    "email": "somchai.jaidee@example.com",
+    "username": "somchai_j"
+  },
+  {
+    "id": "2",
+    "firstName": "สมหญิง",
+    "lastName": "รักเรียน",
+    "email": "somying.rakrian@example.com",
+    "username": "somying_r"
+  }
+]

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
-
+import { User } from './user.interface';
 @Controller('users')
 export class UserController {
   constructor(private readonly appService: UserService) {}
@@ -10,7 +10,7 @@ export class UserController {
     return this.appService.test();
   }
   @Get()
-  findAll() {
+  findAll(): User[] {
     return this.appService.findAll();
   }
 }

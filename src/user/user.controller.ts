@@ -14,15 +14,16 @@ export class UserController {
     return this.appService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string, @Query('fields') fields: string) {
+  findOne(@Param('id') id: string, @Query('fields') fields: string):User | Partial<User>{
     const fid = this.appService.findOne(Number(id));
     if (!fields) return fid;
 
     const fieldList = fields.split(',');
-    const result = {};
+    const result: Partial<User> = {};
     fieldList.forEach((field) => {
-      if (fid[field] !== undefined) {
-        result[field] = fid[field];
+      if (field in fid) {
+        const key = field as keyof User;
+        result[key] = fid[key];
       }
     });
     return result;

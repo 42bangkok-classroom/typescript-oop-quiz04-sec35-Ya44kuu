@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import type { User } from './user.interface';
 @Controller('users')
@@ -14,9 +14,17 @@ export class UserController {
     return this.appService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string, @Query('fields') fields: string) {
     const fid = this.appService.findOne(Number(id));
-    const { firstName, lastName, email } = fid;
-    return { firstName, lastName, email };
+    if (!fields) return fid;
+
+    const fieldList = fields.split(',');
+    const result = {};
+    fieldList.forEach((field) => {
+      if (fid[field] !== undefined) {
+        result[field] = fid[field];
+      }
+    });
+    return result;
   }
 }

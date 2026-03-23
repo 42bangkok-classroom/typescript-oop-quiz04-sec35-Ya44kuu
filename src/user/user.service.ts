@@ -3,6 +3,22 @@ import * as fs from 'fs';
 import { User } from './user.interface';
 @Injectable()
 export class UserService {
+  private users: User[] = [
+    {
+      id: '1',
+      firstName: 'สมชาย',
+      lastName: 'ใจดี',
+      email: 'somchai.jaidee@example.com',
+      username: 'somchai_j',
+    },
+    {
+      id: '2',
+      firstName: 'สมหญิง',
+      lastName: 'รักเรียน',
+      email: 'somying.rakrian@example.com',
+      username: 'somying_r',
+    },
+  ];
   test(): string[] {
     return [];
   }
@@ -11,8 +27,7 @@ export class UserService {
     return JSON.parse(data) as User[];
   }
   findOne(id: number, fields?: string[]): User | Partial<User> {
-    const users = this.findAll();
-    const user = users.find((u) => Number(u.id) === id);
+    const user = this.users.find((u) => Number(u.id) === id);
 
     if (!user) {
       throw new NotFoundException('User not found');

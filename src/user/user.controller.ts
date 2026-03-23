@@ -17,6 +17,6 @@ export class UserController {
   findOne(@Param('id') id: string, @Query('fields') fields?: string) {
     const fieldList = fields ? fields.split(',') : undefined;
 
-    return this.appService.findOne(Number(id), fieldList);
+    return this.appService.findOne(id, fieldList);
   }
 }

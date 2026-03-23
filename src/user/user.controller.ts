@@ -1,7 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import type { User } from './user.interface';
-import { UserResponseDto } from './api_respon.interface';
 @Controller('users')
 export class UserController {
   constructor(private readonly appService: UserService) {}

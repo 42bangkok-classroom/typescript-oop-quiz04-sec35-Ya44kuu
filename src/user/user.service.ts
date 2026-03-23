@@ -10,12 +10,27 @@ export class UserService {
     const data = fs.readFileSync('data/users.json', 'utf-8');
     return JSON.parse(data) as User[];
   }
-  findOne(id: number): User {
-    const all = this.findAll();
-    const find_one = all.find((b) => Number(b.id) === id);
-    if (!find_one) {
+  findOne(id: number, fields?: string[]): User | Partial<User> {
+    const users = this.findAll();
+    const user = users.find((u) => Number(u.id) === id);
+
+    if (!user) {
       throw new NotFoundException('User not found');
     }
-    return find_one;
+
+    if (!fields) return user;
+
+    if (fields.length === 0) return {};
+
+    const result: Partial<User> = {};
+
+    fields.forEach((field) => {
+      if (field in user) {
+        const key = field as keyof User;
+        result[key] = user[key];
+      }
+    });
+
+    return result;
   }
 }

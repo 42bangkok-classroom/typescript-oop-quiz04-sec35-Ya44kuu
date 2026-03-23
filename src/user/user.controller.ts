@@ -14,21 +14,9 @@ export class UserController {
     return this.appService.findAll();
   }
   @Get(':id')
-  findOne(
-    @Param('id') id: string,
-    @Query('fields') fields: string,
-  ): User | Partial<User> {
-    const fid = this.appService.findOne(Number(id));
-    if (!fields) return fid;
+  findOne(@Param('id') id: string, @Query('fields') fields?: string) {
+    const fieldList = fields ? fields.split(',') : undefined;
 
-    const fieldList = fields.split(',');
-    const result: Partial<User> = {};
-    fieldList.forEach((field) => {
-      if (field in fid) {
-        const key = field as keyof User;
-        result[key] = fid[key];
-      }
-    });
-    return result;
+    return this.appService.findOne(Number(id), fieldList);
   }
 }

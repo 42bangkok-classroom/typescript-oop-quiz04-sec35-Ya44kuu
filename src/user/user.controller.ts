@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './user.interface';
+import type { User } from './user.interface';
+import { UserResponseDto } from './api_respon.interface';
 @Controller('users')
 export class UserController {
   constructor(private readonly appService: UserService) {}
@@ -12,5 +13,11 @@ export class UserController {
   @Get()
   findAll(): User[] {
     return this.appService.findAll();
+  }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    const fid = this.appService.findOne(Number(id));
+    const { firstName, lastName, email } = fid;
+    return { firstName, lastName, email };
   }
 }

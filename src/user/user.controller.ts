@@ -14,7 +14,10 @@ export class UserController {
     return this.appService.findAll();
   }
   @Get(':id')
-  findOne(@Param('id') id: string, @Query('fields') fields: string):User | Partial<User>{
+  findOne(
+    @Param('id') id: string,
+    @Query('fields') fields: string,
+  ): User | Partial<User> {
     const fid = this.appService.findOne(Number(id));
     if (!fields) return fid;
 

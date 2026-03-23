@@ -12,7 +12,7 @@ export class UserService {
   }
   findOne(id: string, fields?: string[]): User | Partial<User> {
     const users = this.findAll();
-    const user = users.find(u => u.id === id);
+    const user = users.find((u) => u.id === id);
 
     if (!user) {
       throw new NotFoundException('User not found');

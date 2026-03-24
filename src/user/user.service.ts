@@ -34,7 +34,7 @@ export class UserService {
 
     return result;
   }
-  creatUser(data: CreatUserDto): User {
+  creat(data: CreatUserDto): User {
     const users = this.findAll();
 
     const newUser: User = {

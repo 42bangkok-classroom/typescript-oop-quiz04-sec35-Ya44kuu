@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 import { User } from './user.interface';
+import { CreatUserDto } from './dto/create-user.dto';
+import { stdin } from 'process';
+import { stringify } from 'querystring';
 @Injectable()
 export class UserService {
   test(): string[] {
@@ -32,5 +35,15 @@ export class UserService {
     });
 
     return result;
+  }
+  creatUser(data: CreatUserDto): User {
+    const users = this.findAll();
+
+    const newUser: User = {
+      id: String(users.length + 1),
+      ...data,
+    };
+    users.push(newUser);
+    return newUser;
   }
 }

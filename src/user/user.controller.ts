@@ -1,6 +1,7 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import type { User } from './user.interface';
+import { CreatUserDto } from './dto/create-user.dto';
 @Controller('users')
 export class UserController {
   constructor(private readonly appService: UserService) {}
@@ -18,5 +19,9 @@ export class UserController {
     const fieldList = fields ? fields.split(',') : undefined;
 
     return this.appService.findOne(id, fieldList);
+  }
+  @Post()
+  creatUser(@Body() dto: CreatUserDto) {
+    return this.appService.creatUser(dto);
   }
 }

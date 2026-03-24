@@ -42,6 +42,7 @@ export class UserService {
       ...data,
     };
     users.push(newUser);
+    fs.writeFileSync('data/users.json', JSON.stringify(users, null, 2));
     return newUser;
   }
 }

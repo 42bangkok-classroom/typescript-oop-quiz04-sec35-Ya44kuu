@@ -2,8 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import * as fs from 'fs';
 import { User } from './user.interface';
 import { CreatUserDto } from './dto/create-user.dto';
-import { stdin } from 'process';
-import { stringify } from 'querystring';
 @Injectable()
 export class UserService {
   test(): string[] {

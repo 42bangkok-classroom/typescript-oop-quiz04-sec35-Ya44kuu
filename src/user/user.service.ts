@@ -36,9 +36,12 @@ export class UserService {
   }
   create(data: CreateUserDto): User {
     const users = this.findAll();
+    const maxId = users.length
+      ? Math.max(...users.map((u) => Number(u.id)))
+      : 0;
 
     const newUser: User = {
-      id: String(users.length + 1),
+      id: String(maxId + 1),
       ...data,
     };
     users.push(newUser);

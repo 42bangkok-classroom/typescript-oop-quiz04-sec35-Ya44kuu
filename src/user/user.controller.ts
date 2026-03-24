@@ -22,7 +22,7 @@ export class UserController {
     return this.appService.findOne(id, fieldList);
   }
   @Post()
-  create(@Body(new ValidationPipe({ transform: true })) dto: CreateUserDto) {
+  create(@Body(new ValidationPipe()) dto: CreateUserDto) {
     return this.appService.create(dto);
   }
 }

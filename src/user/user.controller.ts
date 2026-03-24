@@ -21,7 +21,7 @@ export class UserController {
     return this.appService.findOne(id, fieldList);
   }
   @Post()
-  createUser(@Body() dto: CreateUserDto) {
+  create(@Body() dto: CreateUserDto) {
     return this.appService.create(dto);
   }
 }
